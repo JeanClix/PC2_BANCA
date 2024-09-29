@@ -12,6 +12,7 @@ namespace PC2.Controllers
     public class BancoController : Controller
     {
         private readonly ILogger<BancoController> _logger;
+        private readonly ApplicationDbContext _context;
 
         public BancoController(ILogger<BancoController> logger)
         {

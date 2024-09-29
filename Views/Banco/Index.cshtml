@@ -1,75 +1,78 @@
-@model PC2.Models.Banco
-
-
-<style>
-    /* Estilo del formulario */
-.form-group {
-    margin-bottom: 15px;
+@model PC2.ViewModel.BancoVM
+@{
+    ViewData["Title"] = "Gestión de Banco";
 }
-
-.form-group label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    color: #333; /* Color del texto */
-}
-
-<<<<<<< HEAD
-<div>
-    <h1>Prueba</h1>
-</div>
-=======
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-    border-color: #007bff; /* Color del borde al enfocar */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #28a745; /* Color verde */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    border: none; /* Sin borde para el botón */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-}
-
-.btn:hover {
-    background-color: #218838; /* Color verde oscuro */
-    transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
-}
-
-</style>
-<h2>Registrar Cuenta Bancaria</h2>
-
-<form asp-controller="Cuentasbancarias" asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="NombreTitular"></label>
-        <input asp-for="NombreTitular" class="form-control" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">@ViewData["Title"]</h2>
+        <div class="row">
+            <div class="col-md-5">
+                <h3>Formulario de Banco</h3>
+                <form asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label asp-for="FormBanco.NombreTitular" class="form-label">Nombre del Titular</label>
+                        <input asp-for="FormBanco.NombreTitular" class="form-control" />
+                        <span asp-validation-for="FormBanco.NombreTitular" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="FormBanco.TipoCuenta" class="form-label">Tipo de Cuenta</label>
+                        <input asp-for="FormBanco.TipoCuenta" class="form-control" />
+                        <span asp-validation-for="FormBanco.TipoCuenta" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="FormBanco.SaldoInicial" class="form-label">Saldo Inicial</label>
+                        <input asp-for="FormBanco.SaldoInicial" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="FormBanco.SaldoInicial" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="FormBanco.Email" class="form-label">Email</label>
+                        <input asp-for="FormBanco.Email" class="form-control" type="email" />
+                        <span asp-validation-for="FormBanco.Email" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+            <div class="col-md-7">
+                <h3>Listado de Bancos</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre del Titular</th>
+                            <th>Tipo de Cuenta</th>
+                            <th>Saldo</th>
+                            <th>Email</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ListBanco)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.NombreTitular</td>
+                                <td>@item.TipoCuenta</td>
+                                <td>@item.SaldoInicial.ToString("C")</td>
+                                <td>@item.Email</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="TipoCuenta"></label>
-        <input asp-for="TipoCuenta" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="SaldoInicial"></label>
-        <input asp-for="SaldoInicial" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <br>
-    <button type="submit" class="btn">Registrar</button>
-</form>
->>>>>>> vistas
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

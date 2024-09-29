@@ -10,7 +10,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
         
     }
-    public DbSet<PC2.Models.Banco> DataBanco { get;set;}
+    public DbSet<PC2.Models.Banco> Bancos { get;set;}
 
         
 }

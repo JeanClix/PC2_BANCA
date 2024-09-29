@@ -14,7 +14,6 @@ namespace PC2.Models
         public long Id { get; set;}
         public string? NombreTitular {get; set;}
         public string? TipoCuenta {get; set;}
-        [DataType(DataType.Currency)]
         public decimal SaldoInicial { get; set; }
         public string? Email {get; set;}
     }

@@ -1,33 +1,44 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using PC2.Models;
+using PC2.Data;
+using PC2.ViewModel;
 
 namespace PC2.Controllers
 {
-    [Route("[controller]")]
     public class BancoController : Controller
     {
-        private readonly ILogger<BancoController> _logger;
         private readonly ApplicationDbContext _context;
 
-        public BancoController(ILogger<BancoController> logger)
+        public BancoController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        // GET: Banco
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var viewModel = new BancoVM
+            {
+                ListBanco = await _context.Bancos.ToListAsync()
+            };
+            return View(viewModel);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        // POST: Banco/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(BancoVM viewModel)
         {
-            return View("Error!");
+            if (ModelState.IsValid)
+            {
+                _context.Bancos.Add(viewModel.FormBanco);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            viewModel.ListBanco = await _context.Bancos.ToListAsync();
+            return View("Index", viewModel);
         }
     }
 }

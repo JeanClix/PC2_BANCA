@@ -16,15 +16,7 @@ namespace PC2.Controllers
             _context = context;
         }
 
-        // GET: Banco
-        public async Task<IActionResult> Index()
-        {
-            var viewModel = new BancoVM
-            {
-                ListBanco = await _context.Bancos.ToListAsync()
-            };
-            return View(viewModel);
-        }
+        
 
         // POST: Banco/Create
         [HttpPost]

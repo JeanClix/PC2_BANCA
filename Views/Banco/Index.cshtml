@@ -41,7 +41,35 @@
                 </form>
             </div>
             <div class="col-md-7">
-                
+                <h3>Listado de Bancos</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre del Titular</th>
+                            <th>Tipo de Cuenta</th>
+                            <th>Saldo</th>
+                            <th>Email</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ListBanco)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.NombreTitular</td>
+                                <td>@item.TipoCuenta</td>
+                                <td>@item.SaldoInicial.ToString("C")</td>
+                                <td>@item.Email</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

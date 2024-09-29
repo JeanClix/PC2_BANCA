@@ -15,7 +15,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PC2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b14f3721253b91ecd2d898b315049ee7b9921a52")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7469b9c086a48f28c544b9c7e801dad5cdce321")]
+>>>>>>> vistas
 [assembly: System.Reflection.AssemblyProductAttribute("PC2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PC2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
